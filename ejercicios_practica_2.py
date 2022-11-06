@@ -27,7 +27,16 @@ def ej3():
     # para cumplir con el enunciado del ejercicio
 
     # Comenzar aquí, recuerde el identado dentro de esta funcion
+    csvfile = open(archivo, 'r')
+    buscar_tornillos = list(csv.DictReader(csvfile))
     
+    total_tornillo = 0
+    for mercaderia in buscar_tornillos:
+        total_tornillo += int(mercaderia['tornillos'])
+
+    print(total_tornillo, 'Es el nuevo saldo en el stock de tornillos')
+    csvfile.close()
+
 
 
 def ej4():
@@ -47,8 +56,31 @@ def ej4():
     # utilizando "try except", tema que se verá la clase que viene.
 
     # Comenzar aquí, recuerde el identado dentro de esta funcion
+    csvfile = open(archivo, 'r')
+    buscar_departamentos = list(csv.DictReader(csvfile))
 
+    total_2ambientes = 0
+    total_3ambientes = 0
+    cantidad_dptos = len(buscar_departamentos)
 
+    for dptos in range(cantidad_dptos):
+        row = buscar_departamentos[dptos]
+        try:
+            cant_ambientes = int(row.get('ambientes'))
+            if cant_ambientes == 2:
+                total_2ambientes += 1 
+            elif cant_ambientes == 3:
+                total_3ambientes += 1
+        except:
+            continue
+    
+    print('Al analizar', cantidad_dptos, 'departamentos')
+    print(total_2ambientes, 'son departamentos de 2 ambientes')
+    print(total_3ambientes, 'son departamentos de 3 ambientes')
+    csvfile.close()
+
+            
+     
 if __name__ == '__main__':
     print("Bienvenidos a otra clase de Inove con Python")
     ej3()
